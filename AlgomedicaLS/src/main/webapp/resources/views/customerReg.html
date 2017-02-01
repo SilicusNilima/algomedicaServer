@@ -1,0 +1,253 @@
+<div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href><img src="resources/images/logo.png" height="37" title="AlgoMedica"></a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+            <li class="">
+                    <a href ng-click="gotoHome()">
+                        <i class="fa fa-home"></i> Home 
+                    </a>
+                </li>
+                <li class="">
+                    <a>
+                        Welcome, <span class="welcome-name"  ng-bind="userName"></span>
+                    </a>
+                </li>
+                
+              <!-- /.dropdown -->
+                <li class="">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href ng-click="logout()">
+                        <i class="fa fa-power-off"></i> Logout
+                    </a>
+                </li>
+                
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper1" style="min-height: 732px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Customer Information</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+            <div class="col-lg-12 col-md-12">
+                	<div class="row clearfix">
+		<div class="col-md-12 column">
+			 <div class="row bs-wizard" style="border-bottom:0;">
+                
+                <div class="col-xs-6 bs-wizard-step complete">
+                  <div class="text-center bs-wizard-stepnum">Customer Details</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center"></div>
+                </div>
+                
+                <div class="col-xs-6 bs-wizard-step disabled">
+                  <div class="text-center bs-wizard-stepnum">Machine Details</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center"></div>
+                </div>
+                
+                
+                
+                
+            </div>
+</div>
+		</div>
+        
+        <div class="row page-bg">
+        <div class="row clearfix">
+            <div class="col-md-12">
+            	<h2 class="subheading">Customer Details</h2>
+            </div>
+            <div  class="alert alert-danger alert-dismissible" ng-if = "isInvalidData" style="margin-left:25%; width:50% "id="myCustomerAlert" >
+    <a class="close" ng-click="closeAlert()">&times;</a>
+    <strong>{{CustomererrorMessage}}</strong> 
+  </div>
+            <div class="col-md-12 column"> 
+            <form  role="form" name="customerForm" novalidate>       
+                <fieldset>
+    <div class='row'>
+        <div class='col-sm-4'>    
+            <div class='form-group'>
+            <label class="control-label" for="organisationName">Organisation Name</label>
+                <input class="form-control" id="orgName" name="orgName"  type="text" ng-readonly="isEditable"  ng-maxlength="45" ng-model="customerDetails.orgName"  />
+                <div ng-show="customerForm.$submitted || customerForm.orgName.$touched">
+      <div ng-show="customerForm.orgName.$error.maxlength" class="validation-error">Organisation Name is too long</div>
+													</div>
+                
+            </div>
+        </div>
+            <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="personName">Contact Person Name*</label>
+                <input class="form-control" id="personName" name="personName" type="text" ng-readonly="isEditable"  ng-maxlength="45"  ng-model="customerDetails.orgPersonName"  required/>
+             <div ng-show="customerForm.$submitted || customerForm.personName.$touched">
+      <div ng-show="customerForm.personName.$error.required"  class="validation-error">Contact Person Name is required</div>
+      <div ng-show="customerForm.personName.$error.maxlength" class="validation-error">Contact Person Name is too long</div>
+													</div>
+    </div>
+    
+    
+    
+    
+    
+    
+            </div>
+           
+        <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="personEmailId">Contact Person Email Id*</label>
+                <input class="form-control" id="personEmailId" name="personEmailId" type="email" ng-readonly="isEditable"  ng-maxlength="45" ng-model="customerDetails.orgEmail" required/>
+              <div ng-show="customerForm.$submitted || customerForm.personEmailId.$touched">
+      <div ng-show="customerForm.personEmailId.$error.required"  class="validation-error">Email Id is required</div>
+            <div ng-show="customerForm.personEmailId.$error.email"  class="validation-error">Email Id is not valid</div>
+            <div ng-show="customerForm.personEmailId.$error.maxlength" class="validation-error">Email Id is too long</div>
+      
+    </div>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="contact1">Primary Contact Number*</label>
+                <input class="form-control" id="contact1" name="contact1"  type="tel" ng-readonly="isEditable"  ng-minlength="10" ng-maxlength="45" required ng-model="customerDetails.orgPhone" required/>
+           		    <div ng-show="customerForm.$submitted || customerForm.contact1.$touched">
+      <div ng-show="customerForm.contact1.$error.required"  class="validation-error">Primary Contact Number is required</div>
+      <div ng-show="customerForm.contact1.$error.minlength" class="validation-error">Primary Contact Number is too short</div>
+        <div ng-show="customerForm.contact1.$error.maxlength" class="validation-error">Primary Contact Number is too long</div>
+    </div>
+            </div>
+        </div>
+        <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="alternateContactNo">Alternate Contact Number</label>
+                <input class="form-control" id="contact2" name="contact2"  type="tel" ng-readonly="isEditable" ng-minlength="10" ng-maxlength="45" ng-model="customerDetails.orgPersonPhone"/>
+              <div ng-show="customerForm.$submitted || customerForm.contact2.$touched">
+    
+      <div ng-show="customerForm.contact2.$error.minlength" class="validation-error">Alternate Contact Number is too short</div>
+       <div ng-show="customerForm.contact2.$error.maxlength" class="validation-error">Alternate Contact Number is too long</div>
+    </div>
+            </div>
+        </div>
+        <!-- <div class='col-sm-4'>
+            <div class='form-group'>
+                <select class="input-medium bfh-countries form-control" data-country="US"><option>Country</option></select>
+               
+            </div> 
+        </div>-->
+         <div class='col-sm-4'>
+            <div class='form-group' ">
+               <label class="control-label" for="country">Country*</label>
+                <input class="form-control" id="country" name="country" type="tel" ng-readonly="isEditable"  ng-maxlength="45" ng-model="customerDetails.countryName" required/>
+            <div ng-show="customerForm.$submitted || customerForm.country.$touched">
+      <div ng-show="customerForm.country.$error.required"  class="validation-error">Country is required</div>
+      <div ng-show="customerForm.country.$error.maxlength" class="validation-error">Country is too long</div>
+    </div>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="city">City*</label>
+                <input class="form-control" id="city" name="city" ng-readonly="isEditable" ng-model="customerDetails.cityName"  ng-maxlength="45" type="text" required/>
+             <div ng-show="customerForm.$submitted || customerForm.city.$touched">
+      <div ng-show="customerForm.city.$error.required"  class="validation-error">City is required</div>
+      <div ng-show="customerForm.city.$error.maxlength" class="validation-error">City is too long</div>
+    </div>
+            </div>
+        </div>
+        <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="state">State*</label>
+               <input class="form-control" id="State" name="State" ng-readonly="isEditable"  ng-maxlength="45"  type="text" ng-model="customerDetails.stateName" required/>
+            	<div ng-show="customerForm.$submitted || customerForm.State.$touched">
+      <div ng-show="customerForm.State.$error.required"  class="validation-error">State is required</div>
+      <div ng-show="customerForm.State.$error.maxlength" class="validation-error">State is too long</div>
+    </div>
+            </div>
+        </div>
+        <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="PIN">Postal Code*</label>
+                <input class="form-control" id="PIN" name="PIN" type="text" ng-readonly="isEditable"  ng-maxlength="10"  ng-model="customerDetails.postalCode" required/>
+             	<div ng-show="customerForm.$submitted || customerForm.PIN.$touched">
+      <div ng-show="customerForm.PIN.$error.required"  class="validation-error">Postal Code is required</div>
+      <div ng-show="customerForm.PIN.$error.maxlength" class="validation-error">Postal Code  is too long</div>
+    </div>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="address1" ">Address Line 1*</label>
+                <input class="form-control" id="address1" name="address1"  type="text"  ng-maxlength="100"  ng-readonly="isEditable" ng-model="customerDetails.addressLine1" required/>
+           	<div ng-show="customerForm.$submitted || customerForm.address1.$touched">
+      <div ng-show="customerForm.address1.$error.required"  class="validation-error">Address is required</div>
+      <div ng-show="customerForm.address1.$error.maxlength" class="validation-error">Address is too long</div>
+    </div>
+            </div>
+        </div>
+        <div class='col-sm-4'>
+            <div class='form-group'>
+               <label class="control-label" for="addressLine2">Address Line 2</label>
+               <input class="form-control" id="address2" name="address2" type="text" ng-readonly="isEditable"  ng-maxlength="100"  ng-model="customerDetails.addressLine2"/>
+              	<div ng-show="customerForm.$submitted || customerForm.address2.$touched">
+     
+      <div ng-show="customerForm.address2.$error.maxlength" class="validation-error">Address is too long</div>
+    </div>
+            </div>
+        </div>
+        <div class='col-sm-4'>
+            <div class='form-group'>
+                
+            </div>
+        </div>
+    </div>
+    
+</fieldset>
+<div class="row mtb20 pull-right">
+   <button class="btn btn-success" ng-if="isEditable==false" ng-click="saveCustomer()" ng-disabled="customerForm.$invalid || !customerForm.$dirty">Save</button><!--
+   <button class="btn btn-disabled">Cancel</button>-->
+    
+   <button class="btn btn-success" ng-if="newCustomer==false" ng-click="licenseDetails()">Next</button>
+    </div> 
+             </form>   
+             </div>
+		</div>
+	</div>
+	
+    
+            </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+<footer>
+<div class="col-md-12">
+	<p class="pull-right footer-text">Copyright 2016. All Rights Reserved</p>
+    </div>
+</footer>
+    </div>

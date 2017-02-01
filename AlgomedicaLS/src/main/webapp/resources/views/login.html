@@ -1,0 +1,37 @@
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+            <h1 class="logo"><a href title="AlgoMedica"><img src="resources/images/logo.png"></a></h1>
+            <div class="login-panel panel panel-default">
+                    <div class="panel-heading login-heading">
+                        <h3 class="panel-title login-heading"><u>LOGIN</u></h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" name="userForm" novalidate>
+                            <fieldset>
+                                <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+                                    <input class="form-control login-place" id="inputEmail"  placeholder="Username"  ng-model="loginDetails.username" name="username" type="text" required autofocus>
+                                  <small  ng-show="userForm.username.$invalid && !userForm.username.$pristine" class="validation-error">The username is required</small>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+                                    <input class="form-control login-place" id="inputPassword"  ng-model="loginDetails.password" placeholder="Password" name="password" type="password" value="" required>
+                                                                  <small  ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="validation-error">The password is required</small>
+                                
+                                </div>
+                               
+                                <button class="btn btn-lg btn-success btn-block" ng-click="login()">Login</button>
+                                
+  <div ng-if = "isInvalid" class="alert alert-danger alert-dismissible" id="myAlert" >
+    <a class="close" ng-click="closeAlert()">&times;</a>
+    <strong>{{errorMessage}}</strong> 
+  </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    

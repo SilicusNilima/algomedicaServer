@@ -1,0 +1,480 @@
+<div id="wrapper">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-default navbar-static-top" role="navigation"
+		style="margin-bottom: 0">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href><img src="resources/images/logo.png"
+				height="37" title="AlgoMedica"></a>
+		</div>
+		<!-- /.navbar-header -->
+
+		<ul class="nav navbar-top-links navbar-right">
+			<li class=""><a href ng-click="gotoHome()"> <i
+					class="fa fa-home"></i> Home
+			</a></li>
+			<li class=""><a> Welcome, <span class="welcome-name"
+					ng-bind="userName"></span>
+			</a></li>
+			<!-- /.dropdown -->
+			<li class=""><a class="dropdown-toggle" data-toggle="dropdown"
+				href ng-click="logout()"> <i class="fa fa-power-off"></i> Logout
+			</a></li>
+
+		</ul>
+		<!-- /.navbar-top-links -->
+
+
+		<!-- /.navbar-static-side -->
+	</nav>
+
+	<div id="page-wrapper1" style="min-height: 732px;">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Customer Information</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<modal visible="showModal"> {{LicenseKey}} </modal>
+		<!-- /.row -->
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="row clearfix">
+					<div class="col-md-12 column">
+						<div class="row bs-wizard" style="border-bottom: 0;">
+
+							<div class="col-xs-6 bs-wizard-step complete">
+								<div class="text-center bs-wizard-stepnum">Customer
+									Details</div>
+								<div class="progress">
+									<div class="progress-bar"></div>
+								</div>
+								<a href class="bs-wizard-dot"></a>
+								<div class="bs-wizard-info text-center"></div>
+							</div>
+
+							<div class="col-xs-6 bs-wizard-step complete">
+								<div class="text-center bs-wizard-stepnum">License Details</div>
+								<div class="progress">
+									<div class="progress-bar"></div>
+								</div>
+								<a href class="bs-wizard-dot"></a>
+								<div class="bs-wizard-info text-center"></div>
+							</div>
+
+
+
+
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="row page-bg">
+					<div class="row clearfix">
+						<div class="col-md-12">
+							<h2 class="subheading">License Details</h2>
+						</div>
+						<div class="col-md-12 column">
+
+
+							<div class="row clearfix">
+								<div class="col-md-12 column" ng-if="licensePresent">
+									<table
+										class="table table-striped table-bordered table-hover table-responsive"
+										id="dataTables-example">
+										<thead>
+											<tr>
+
+												<th width="15%" class="">MAC #</th>
+												<th width="6%" class="">Type</th>
+												<th class="">Category</th>
+												<th class="">Validity (In Days)</th>
+												<th class="">Cost</th>
+												<th class="">License Key Serial #</th>
+												<th class="">Send Email To</th>
+												<th ng-if="role=='Admin'">Download File</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr id="tr{{license.id}}" ng-repeat="license in licenseList">
+												<td ng-bind="license.lsMacAddress"></td>
+
+												<td><span class="" ng-bind="license.lsLicenseType"></span>
+												</td>
+												<td><span class="" ng-bind="license.lsCategory">
+												</span></td>
+												<td>
+													<!--<button type="button" class="btn btn-trans" data-widget="collapse"><i class="fa fa-eye"></i>
+                </button>
+                <button type="button" class="btn btn-trans" data-widget="collapse"><i class="fa fa-pencil"></i>
+                </button>--> <span class=""
+													ng-bind="license.lsExpiryDays"></span>
+												</td>
+												<td><span class="" ng-bind="license.lsCost"></span></td>
+												<td><span class="" ng-bind="license.lsLicenseKey"></span></td>
+												<td><span class="" ng-bind="license.lsOpsEmail"></span>
+												</td>
+												<td ng-if="role=='Admin'">
+													<button type="button" class="btn btn-trans"
+														data-widget="collapse" title="Download file"
+														ng-click="download(license.id)">
+														<i class="fa fa-download"></i>
+													</button>
+												</td>
+												<td>
+													<button type="button" class="btn btn-trans"
+														data-widget="collapse" title="View"
+														ng-click="view(license.id)">
+														<i class="fa fa-eye" title="View"></i>
+													</button>
+
+													<button type="button" class="btn btn-trans"
+														data-widget="collapse" title="Edit" ng-if="role=='Admin'"
+														ng-click="edit(license.id)">
+														<i class="fa fa-pencil"></i>
+													</button>
+												</td>
+											</tr>
+
+
+
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<a id="add_row" class="btn btn-primary pull-left"
+								ng-click="showNewMachineForm()"><i class="fa fa-plus"></i>
+								Add New Machine</a>
+							<!--<a id='delete_row' class="pull-right btn btn-primary"><i class="fa fa-trash"></i> Delete Row</a>-->
+
+							<div class="clearfix"></div>
+
+
+
+							<div class="row clearfix" ng-show="displayForm">
+								<!--<div class="col-md-12">
+            	<h2 class="subheading">Step1 : Customer Details</h2>
+            </div>-->
+
+								<div class="alert alert-danger alert-dismissible"
+									ng-if="isInvalidData" style="margin-left: 25%; width: 50%"
+									id="myLicenseAlert">
+									<a class="close" ng-click="closeAlert()">&times;</a> <strong>{{LicenseerrorMessage}}</strong>
+								</div>
+								<div class="col-md-12 column">
+									<form role="form" name="licenseForm" novalidate>
+										<fieldset>
+											<div class='row'>
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="macNumber">Mac
+															#*</label> <input class="form-control" id="MACNo" name="MACNo"
+															type="text" ng-model="licenseDetails.lsmacAddress"
+															ng-readonly="isLicenseEditable" ng-minlength="12" maxlength="12" ng-pattern="/^[a-fA-F0-9]*$/" 
+															 required="required" />
+														<div
+															ng-show="!isLicenseEditable && licenseForm.$submitted || !isLicenseEditable && licenseForm.reason.$touched">
+															<div ng-show="licenseForm.MACNo.$error.required"
+																class="validation-error">Mac Number is required</div>
+															<div ng-show="licenseForm.MACNo.$error.minlength"
+																class="validation-error">Mac Number is too short</div>
+																<div ng-show="licenseForm.MACNo.$error.maxlength"
+																class="validation-error">Mac Number is too long</div>
+																<div ng-show="licenseForm.MACNo.$error.pattern"
+																class="validation-error">Special Characters and letter above F are not allowed</div>
+														</div>
+
+													</div>
+												</div>
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="deviceModelNo">Device
+															Model #*</label> <input class="form-control" id="Device Model #"
+															name="DeviceModel"  type="text"
+															ng-model="licenseDetails.lsmodelNumber" ng-maxlength="45"
+															ng-readonly="isLicenseEditable" required />
+														<div
+															ng-show="licenseForm.$submitted || licenseForm.DeviceModel.$touched">
+															<div ng-show="licenseForm.DeviceModel.$error.required"
+																class="validation-error">Device Model Number is
+																required</div>
+															<div ng-show="licenseForm.DeviceModel.$error.maxlength"
+																class="validation-error">Device Model Number is too
+																long</div>
+
+														</div>
+													</div>
+												</div>
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="deviceBrandName">Device
+															Brand Name*</label> <input class="form-control"
+															id="Device Brand Name" name="DeviceBrandName" type="text"
+															ng-model="licenseDetails.lsmodelName" ng-maxlength="45"
+															ng-readonly="isLicenseEditable" required />
+														<div
+															ng-show="licenseForm.$submitted || licenseForm.DeviceBrandName.$touched">
+															<div
+																ng-show="licenseForm.DeviceBrandName.$error.required"
+																class="validation-error">Device Brand Name is
+																required</div>
+															<div
+																ng-show="licenseForm.DeviceBrandName.$error.maxlength"
+																class="validation-error">Device Brand Name is too
+																long</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='row'>
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="licenseType">License
+															Type*</label> <select class="form-control"
+															ng-model="licenseDetails.lsType" name="lsType"
+															ng-disabled="isLicenseEditable" required>
+															<option value="">License Type</option>
+															<option ng-repeat="type in LicenseType" value="{{type}}"
+																ng-selected="licenseDetails.lsType == type">
+																{{type}}</option>
+														</select>
+														<div
+															ng-show="licenseForm.$submitted || licenseForm.lsType.$touched">
+															<div ng-show="licenseForm.lsType.$error.required"
+																class="validation-error">License Type is required</div>
+														</div>
+													</div>
+
+
+
+
+												</div>
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="licenseCategory">License
+															Category*</label>
+														<!--                 <select class="form-control"><optgroup><option>License Category</option></optgroup></select>
+ -->
+														<select class="form-control"
+															ng-model="licenseDetails.lsCategory"
+															name="LicenseCategory" ng-disabled="isLicenseEditable"
+															required>
+															<option value="" label="LicenseCategory">License
+																Category</option>
+															<option ng-repeat="category in LicenseCategory"
+																value="{{category}}"
+																ng-selected="licenseDetails.lsCategory==category">
+																{{category}}</option>
+														</select>
+														<div
+															ng-show="licenseForm.$submitted || licenseForm.LicenseCategory.$touched">
+															<div
+																ng-show="licenseForm.LicenseCategory.$error.required"
+																class="validation-error">License Category is
+																required</div>
+														</div>
+													</div>
+												</div>
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="licenseValidity">License
+															Validity (In Days)*</label> <input class="form-control  "
+															id="License Validity" name="LicenseValidity" numbers-only
+															ng-model="licenseDetails.lsExipryDays"
+															ng-readonly="isLicenseEditable" ng-maxlength="5" required />
+														<div
+															ng-show="licenseForm.$submitted || licenseForm.LicenseValidity.$touched">
+															<div
+																ng-show="licenseForm.LicenseValidity.$error.required"
+																class="validation-error">License Validity is
+																required</div>
+															<div
+																ng-show="licenseForm.LicenseValidity.$error.maxlength"
+																class="validation-error">License Validity is too
+																long</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='row'>
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="licenseCost">License
+															Cost*</label>
+														<div class="input-group">
+															<span class="input-group-addon">$</span> <input
+																class="form-control  " id="License Cost"
+																name="LicenseCost" size="30" type="text"
+																ng-model="licenseDetails.lsCost"
+																ng-readonly="isLicenseEditable" valid-number
+																ng-maxlength="7" required />
+														</div>
+														<div
+															ng-show="licenseForm.$submitted || licenseForm.LicenseCost.$touched">
+															<div ng-show="licenseForm.LicenseCost.$error.required"
+																class="validation-error">License Cost is required</div>
+															<div ng-show="licenseForm.LicenseCost.$error.maxlength"
+																class="validation-error">License Cost is too long</div>
+														</div>
+
+
+
+
+													</div>
+												</div>
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="salesOpsPersonalName">Sales
+															Ops Personnel Name*</label> <input class="form-control  "
+															id="Sales Ops Personnel Name" name="salesOpsName"
+															type="text" ng-maxlength="45"
+															ng-model="licenseDetails.lsOpsName"
+															ng-readonly="isLicenseEditable" required />
+														<div
+															ng-show="licenseForm.$submitted || licenseForm.salesOpsName.$touched">
+															<div ng-show="licenseForm.salesOpsName.$error.required"
+																class="validation-error">Sales Ops Personnel Name
+																is required</div>
+															<div ng-show="licenseForm.salesOpsName.$error.maxlength"
+																class="validation-error">Sales Ops Personnel Name
+																is too long</div>
+														</div>
+
+													</div>
+												</div>
+
+												<div class='col-sm-4'>
+													<div class='form-group'>
+														<label class="control-label" for="sendEmailTo">Send
+															Email To*</label> <input class="form-control required email"
+															id="Send Email To" name="SendEmailTo" type="email"
+															ng-model="licenseDetails.lsOpsEmail" ng-maxlength="45"
+															ng-readonly="isLicenseEditable" required />
+														<div
+															ng-show="licenseForm.$submitted || licenseForm.SendEmailTo.$touched">
+															<div ng-show="licenseForm.SendEmailTo.$error.required"
+																class="validation-error">Send Email To is required</div>
+															<div ng-show="licenseForm.SendEmailTo.$error.maxlength"
+																class="validation-error">Send Email To is too long</div>
+															<div ng-show="licenseForm.SendEmailTo.$error.email"
+																class="validation-error">Email Id is not valid</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+
+											<div class='row'>
+												<div class='col-sm-4'>
+													<div class='form-group' ng-if="newMachine==false">
+														<label class="control-label" for="reason"
+															ng-maxlength="250">Reason*</label>
+														<textarea class="form-control"
+															ng-model="licenseDetails.lsregenerationReason"
+															name="reason" ng-readonly="isLicenseEditable" required></textarea>
+														<div
+															ng-show="!isLicenseEditable && licenseForm.$submitted || !isLicenseEditable && licenseForm.reason.$touched">
+															<div ng-show="licenseForm.reason.$error.required"
+																class="validation-error">Reason is required</div>
+															<div ng-show="licenseForm.reason.$error.maxlength"
+																class="validation-error">Reason is too long</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+										<div class="row mtb20 pull-right">
+										
+											<button class="btn btn-success"
+												ng-if="isLicenseEditable==false" ng-click="addNewMachine()"
+												ng-disabled="licenseForm.$invalid || !licenseForm.$dirty">   Save</button>
+											<button class="btn btn-disabled" ng-click="hideForm()">Cancel</button>
+
+										</div>
+									</form>
+								</div>
+
+							</div>
+						</div>
+
+						<br>
+						<div class="row mtb20 pull-right">
+							<button class="btn btn-success" ng-click="back()">Back</button>
+							<!--<button class="btn btn-success">Save</button>
+   <button class="btn btn-disabled">Cancel</button>
+   <button class="btn btn-success">Edit</button>-->
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+<footer>
+	<div class="col-md-12">
+		<p class="pull-right footer-text">Copyright 2016. All Rights
+			Reserved</p>
+	</div>
+</footer>
+</div>
+<script>
+/* $( document ).ready(function() {
+	var macAddress = document.getElementById("MACNo");
+	var value=null;
+	function chunk(str, n) {
+	    var ret = [];
+	    var i;
+	    var len;
+
+	    for(i = 0, len = str.length; i < len; i += n) {
+	       ret.push(str.substr(i, n))
+	    }
+
+	    return ret
+	};
+
+	
+	function formatMAC(e) {
+		
+		 var r = /([a-f0-9]{2})([a-f0-9]{2})/i,
+	    str = e.target.value.replace(/[^a-f0-9]/ig,"");
+	  if(str.length>12) {
+		  
+		  e.target.value=value;
+	  }
+	  else if(str.length<12){
+	    	//var string = str.replace(/[^a-fA-F0-9]/g, '');
+	    	e.target.value = str;
+	    } 
+	  else
+	    if(r.test(str) && str.length==12){
+	    	//alert("OK");
+	    	var array =[].slice.call(str);
+	    	console.log("IN");
+	    	var ret = [];
+	    	ret=chunk(str,2).join(":");
+	         
+	    	//console.log(ret);
+	    	value=ret.toString();
+	    	e.target.value=ret.toString();
+	    }    
+	};
+
+	macAddress.addEventListener("keyup", formatMAC, false);
+}); */
+</script>

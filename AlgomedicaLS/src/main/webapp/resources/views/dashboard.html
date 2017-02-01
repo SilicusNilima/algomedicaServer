@@ -1,0 +1,163 @@
+<div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href><img src="resources/images/logo.png" height="37" title="AlgoMedica"></a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="">
+                    <a>
+                        Welcome, <span class="welcome-name" ng-bind="userName"></span>
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href ng-click="logout()">
+                        <i class="fa fa-power-off"></i> Logout
+                    </a>
+                </li>
+                
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper1" style="min-height: 732px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row --><div class="row">  <div class="col-md-6"><a id="add_row" ng-click="customerReg()" class="btn btn-success pull-left">Create New Customer</a><br></br></div>
+            <div class="col-md-3"></div>
+            
+            
+            <div class="col-md-3"  ng-if="areCustomers">
+
+
+    <p class="btn btn-primary " style="float: right;cursor:text;">
+    <span class="glyphicon glyphicon-user"></span>
+    Total
+     Customers: <span style="font-size:24px;color: white;">{{customerList.length}}</span>
+     
+     
+     </p>
+
+   </div>
+            
+            
+            
+            <div class="row">
+            <div class="col-lg-12 col-md-12">
+                	<div class="row clearfix">
+                	<form class="form-inline">
+        <!-- <div class="form-group">
+            <label >Search</label>
+            <input type="text" ng-model="search" class="form-control" placeholder="Search">
+        </div> -->
+    </form>
+		<div class="col-md-12 column" ng-if="areCustomers">
+		
+			<table class="table table-bordered table-hover table-striped" id="tab_logic" style="overflow:auto;">
+				<thead>
+					<tr >
+						<th class="">
+							Serial Number
+						</th>
+						<th class=""  style="width:30%" ng-click="sort('orgName')">
+<!-- 						  <span class="glyphicon sort-icon" ng-show="sortKey=='orgName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+ -->          
+ 
+ 
+ <span class="glyphicon sort-icon glyphicon-chevron-up" ng-show="(sortKey=='orgName' && reverse==true)"></span>
+<span class="glyphicon sort-icon glyphicon-chevron-down" ng-show="(sortKey=='orgName' && reverse==false)"></span>
+<span class="glyphicon glyphicon-sort" ng-hide="(sortKey=='orgName' && (reverse==true||reverse==false))"></span>
+							Customer Name
+						</th>
+						<th class="">
+							Email Id
+						</th>
+						<th class="">
+						Address
+						</th>
+                        <th class="">
+							Contact Number
+						</th>
+						  <th class="">
+							Total No. Of License
+						</th>
+                        <th class="">
+							Action
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				
+				
+				
+			<tr ng-repeat="customer in customerList | orderBy:sortKey:reverse|filter:search">	 
+							<!-- 			<tr dir-paginate="customer in customerList|orderBy:sortKey:reverse|filter:search|itemsPerPage:5"> -->
+				
+					<td ng-bind-template="{{$index+1}}">
+						</td>
+						<td >
+						 <span class="table-name" ng-bind="customer.orgName" ></span> 
+						</td>
+						<td>
+						<span class=""  ng-bind="customer.orgEmail"></span>
+						</td>
+						<td>
+						<span class="" ng-bind-template="{{customer.address.address1}}{{customer.address2}},{{customer.address.city.cityName}} {{customer.address.city.zipCode}}"></span>
+						</td>
+                        <td>
+						<span class=""ng-bind="customer.orgPhone">
+</span>
+						</td>
+						<td>
+						<span class=""ng-bind="customer.licenseCount">
+</span>
+						</td><td>
+						<button type="button" class="btn btn-trans" data-widget="collapse"  ng-click="view(customer.id)"><i class="fa fa-eye"></i>
+                </button>
+                <button type="button" class="btn btn-trans" data-widget="collapse" ng-if="role=='Admin'" ng-click="edit(customer.id)"><i class="fa fa-pencil"></i>
+                </button>
+						</td>
+						</tr>
+				
+			
+				</tbody>
+			</table>
+			<!-- <dir-pagination-controls
+					max-size="5"
+					direction-links="true"
+					boundary-links="true" >
+				</dir-pagination-controls> -->
+		</div>
+	</div>
+	
+    
+            </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <footer>
+<div class="col-md-12">
+	<p class="pull-right footer-text">Copyright 2016. All Rights Reserved</p>
+    </div>
+</footer>
