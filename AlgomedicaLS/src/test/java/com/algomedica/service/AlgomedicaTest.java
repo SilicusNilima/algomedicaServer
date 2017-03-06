@@ -16,7 +16,7 @@ public class AlgomedicaTest {
    @Test
   public void InvokeBrowser() {
 	   
-	 System.setProperty("webdriver.chrome.driver", "driver\\chromedriver.exe");
+	 System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
 	 driver= new ChromeDriver();
 	 driver.get("http://localhost:8080/AlgomedicaLS/#/");
   }
