@@ -1,36 +1,23 @@
 package com.algomedica.service;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 public class AlgomedicaTest {
 	
-	RemoteWebDriver driver=null;
+	WebDriver driver=null;
 	
    @Test
-  public void InvokeBrowser() throws MalformedURLException {
+  public void InvokeBrowser() {
 	   
-	 /*System.setProperty("webdriver.chrome.driver", "C:\\Users\\NPansare\\AppData\\Roaming\\Skype\\My Skype Received Files\\chromedriver.exe");
-	 driver= new ChromeDriver();*/
-	   DesiredCapabilities capability = DesiredCapabilities.firefox();
-	    
-
-	   driver = new RemoteWebDriver(new URL("http://10.4.1.70/wd/hub"), capability);
-	 /*FirefoxProfile profile = new FirefoxProfile();
-	   profile.setEnableNativeEvents(true);
-	   driver = new remoteWebDriver();*/
+	 System.setProperty("webdriver.chrome.driver", "driver\\chromedriver.exe");
+	 driver= new ChromeDriver();
 	 driver.get("http://localhost:8080/AlgomedicaLS/#/");
   }
 	 	 @Test
@@ -101,7 +88,7 @@ public class AlgomedicaTest {
 	     driver.findElement(By.cssSelector("[class='btn btn-primary pull-left']")).click(); 
 	     	      
 	      WebElement MACNo = driver.findElement(By.id("MACNo"));
-	      MACNo.sendKeys("989919169371");
+	      MACNo.sendKeys("985921096716");
 	      
 	      WebElement DeviceModel= driver.findElement(By.id("Device Model #"));
 	      DeviceModel.sendKeys("Dell Thinkpad");

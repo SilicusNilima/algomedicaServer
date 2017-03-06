@@ -251,7 +251,7 @@
 				</configuration>
 			</plugin>
 			
-			  <plugin>  
+			<!--   <plugin>  
    <groupId>org.codehaus.mojo</groupId>  
    <artifactId>exec-maven-plugin</artifactId>  
    <version>1.1.1</version>  
@@ -262,12 +262,12 @@
       <goal>java</goal>  
      </goals>  
      <configuration>  
-      <mainClass>com.algomedica.service.Algomedica</mainClass>  
+      <mainClass>com.algomedica.service.AlgomedicaTest</mainClass>  
      
      </configuration>  
     </execution>  
    </executions>  
-  </plugin> 
+  </plugin> --> 
 			
 			
 		</plugins>
