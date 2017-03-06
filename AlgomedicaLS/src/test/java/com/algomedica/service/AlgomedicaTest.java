@@ -18,7 +18,7 @@ public class AlgomedicaTest {
 	   
 	 System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
 	 driver= new ChromeDriver();
-	 driver.get("http://localhost:8080/AlgomedicaLS/#/");
+	 driver.get("http://10.4.1.70:8080/AlgomedicaLS/#/");
   }
 	 	 @Test
 	 public void Login() throws InterruptedException{
