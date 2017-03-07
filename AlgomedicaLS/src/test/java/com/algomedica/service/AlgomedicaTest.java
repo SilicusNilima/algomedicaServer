@@ -33,7 +33,7 @@ public class AlgomedicaTest {
   @BeforeTest
   public void launchapp(@Optional("chrome") String browser) throws MalformedURLException
   {
-	   URL ="http://10.4.1.70:8080/AlgomedicaLS/";
+	   URL ="http://10.4.1.70:8080/AlgomedicaLS/#/";
 	   if (browser.equalsIgnoreCase("firefox"))
 	      {
 		   System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
@@ -134,7 +134,7 @@ public class AlgomedicaTest {
 	     driver.findElement(By.cssSelector("[class='btn btn-primary pull-left']")).click(); 
 	     	      
 	      WebElement MACNo = driver.findElement(By.id("MACNo"));
-	      MACNo.sendKeys("985921153716");
+	      MACNo.sendKeys("985921113716");
 	      
 	      WebElement DeviceModel= driver.findElement(By.id("Device Model #"));
 	      DeviceModel.sendKeys("Dell Thinkpad");
