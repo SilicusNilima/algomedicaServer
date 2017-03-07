@@ -1,25 +1,71 @@
 package com.algomedica.service;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.net.URL;
 public class AlgomedicaTest {
 	
-	WebDriver driver=null;
+//	WebDriver driver=null;
 	
-   @Test
+ /*  @Test
   public void InvokeBrowser() {
 	   
-	 System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
+	 System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
 	 driver= new ChromeDriver();
-	 driver.get("http://10.4.1.70:8080/AlgomedicaLS/#/");
+	 driver.get("http://localhost:8080/AlgomedicaLS/#/");
+  }*/ public WebDriver driver;
+  public String URL, Node;
+  protected ThreadLocal<RemoteWebDriver> threadDriver = null;
+  @Parameters("browser")
+  @BeforeTest
+  public void launchapp(@Optional("chrome") String browser) throws MalformedURLException
+  {
+	   URL ="http://10.4.1.70:8080/AlgomedicaLS";
+	   if (browser.equalsIgnoreCase("firefox"))
+	      {
+		   System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
+  String Node = "http://10.4.1.70:5555/wd/hub";
+    DesiredCapabilities cap = DesiredCapabilities.firefox();
+    cap.setBrowserName("firefox");
+    
+    driver = new RemoteWebDriver(new URL(Node), cap);
+    // Puts an Implicit wait, Will wait for 10 seconds before throwing exception
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    
+    // Launch website
+    driver.navigate().to(URL);
+    driver.manage().window().maximize();
   }
+	   else if (browser.equalsIgnoreCase("chrome"))
+	      {
+	         System.out.println(" Executing on CHROME");		
+	    //     System.setProperty("webdriver.chrome.driver", "D://selenium//chromedriver.exe");
+
+	         DesiredCapabilities cap = DesiredCapabilities.chrome();
+	         cap.setBrowserName("chrome");
+	         String Node = "http://10.4.1.70:5558/wd/hub";
+	         driver = new RemoteWebDriver(new URL(Node), cap);
+	         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	         
+	         // Launch website
+	         driver.navigate().to(URL);
+	         driver.manage().window().maximize();
+	      }
+  }
+	
 	 	 @Test
 	 public void Login() throws InterruptedException{
 	 		 
@@ -88,7 +134,7 @@ public class AlgomedicaTest {
 	     driver.findElement(By.cssSelector("[class='btn btn-primary pull-left']")).click(); 
 	     	      
 	      WebElement MACNo = driver.findElement(By.id("MACNo"));
-	      MACNo.sendKeys("985921096716");
+	      MACNo.sendKeys("985921456716");
 	      
 	      WebElement DeviceModel= driver.findElement(By.id("Device Model #"));
 	      DeviceModel.sendKeys("Dell Thinkpad");
