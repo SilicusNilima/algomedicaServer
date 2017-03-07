@@ -134,7 +134,7 @@ public class AlgomedicaTest {
 	     driver.findElement(By.cssSelector("[class='btn btn-primary pull-left']")).click(); 
 	     	      
 	      WebElement MACNo = driver.findElement(By.id("MACNo"));
-	      MACNo.sendKeys("985921456716");
+	      MACNo.sendKeys("985921256716");
 	      
 	      WebElement DeviceModel= driver.findElement(By.id("Device Model #"));
 	      DeviceModel.sendKeys("Dell Thinkpad");
