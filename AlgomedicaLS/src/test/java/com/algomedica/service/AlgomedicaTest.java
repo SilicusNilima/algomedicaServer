@@ -33,7 +33,7 @@ public class AlgomedicaTest {
   @BeforeTest
   public void launchapp(@Optional("chrome") String browser) throws MalformedURLException
   {
-	   URL ="http://10.4.1.70:8080/AlgomedicaLS";
+	   URL ="http://10.4.1.70:8080/AlgomedicaLS/";
 	   if (browser.equalsIgnoreCase("firefox"))
 	      {
 		   System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
